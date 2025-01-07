@@ -97,12 +97,11 @@ mp_obj_t mp_parse_num_integer(const char *restrict str_, size_t len, int base, m
         if (dig >= (mp_uint_t)base) {
             break;
         }
-
+        int_val = int_val * base + dig;
         // add next digi and check for overflow
         if (mp_small_int_mul_overflow(int_val, base)) {
             goto overflow;
         }
-        int_val = int_val * base + dig;
         if (!MP_SMALL_INT_FITS(int_val)) {
             goto overflow;
         }
